@@ -30,7 +30,7 @@ def get_threshold(chat_id: int, date: datetime.date) -> int:
 
 
 client: TelegramClient = TelegramClient(
-    session=config.session_name,
+    session="Goodmorning Userbot Session",
     api_id=config.api_id,
     api_hash=config.api_hash,
 )
