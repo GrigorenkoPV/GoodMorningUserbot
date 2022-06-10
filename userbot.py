@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import asyncio
 import datetime
 import logging
 import os
@@ -23,10 +24,12 @@ logging.basicConfig(
     datefmt=r"%Y-%m-%dT%H-%M-%S",
 )
 
+random.seed()
+
 
 def get_threshold(chat_id: int, date: datetime.date) -> int:
     # Insert your threshold selection logic here
-    return random.randint(1, 5)
+    return random.randint(1, 4)
 
 
 client: TelegramClient = TelegramClient(
@@ -34,11 +37,6 @@ client: TelegramClient = TelegramClient(
     api_id=config.api_id,
     api_hash=config.api_hash,
 )
-
-
-def get_today() -> datetime.date:
-    # Insert your timezone logic here
-    return datetime.date.today()
 
 
 def is_good_morning(message: Message) -> bool:
@@ -61,7 +59,7 @@ async def good_morning_handler(event: events.NewMessage.Event):
     if not is_good_morning(message):
         return
     logging.info(f"Good morning received: {message}")
-    today: datetime.date = get_today()
+    today: datetime.date = datetime.date.today()
     last_date: datetime.date | None = _last_dates.get(chat_id)
     logging.debug(f"Previous good morning was received on {last_date}")
     if last_date is None or last_date < today:
@@ -75,8 +73,14 @@ async def good_morning_handler(event: events.NewMessage.Event):
     threshold = _thresholds[chat_id]
     logging.info(f"This is good morning #{count}/{threshold}")
     if count == threshold:
-        await message.respond(GOOD_MORNING_TEXT)
-        await client.send_read_acknowledge(event.chat_id)
+        logging.info(f"Time for a {GOOD_MORNING_TEXT!r}!")
+        await asyncio.sleep(3)
+        async with client.action(chat_id, "typing"):
+            logging.info("Started typing...")
+            await asyncio.sleep(3)
+            result = await message.respond(GOOD_MORNING_TEXT)
+            logging.info(f"{GOOD_MORNING_TEXT}! {result}")
+            await client.send_read_acknowledge(chat_id)
 
 
 with client:
