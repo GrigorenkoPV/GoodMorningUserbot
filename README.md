@@ -20,7 +20,7 @@ And [dependencies](requirements.txt) installed.
 Replace example values with your `api_id` and `api_hash`.
 Set the ids or @usernames (enter them without the `@`)
 of chats you want to run the userbot in.
-3. On the first launch you will need to log in. After that a `Something-saomething.session` file will be created and it will store the login info, so you won't need to log in again. If you want to just login, without launching the userbot, run `login.py` or `login.sh` (the latter set ups a venv automatically and runs the former).
+3. On the first launch you will need to log in. After that a `Something-something.session` file will be created and it will store the login info, so you won't need to log in again. If you want to just login, without launching the userbot, run `login.py` or `login.sh` (the latter set ups a venv automatically and runs the former).
 4. Launch the userbot with `python -m userbot` or `python userbot.py` or `./service/launch.sh` (the latter automatically sets up a venv).
 5. ?????
 6. That's it. You can also run this as a systemd service, see [here](service).

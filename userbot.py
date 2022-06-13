@@ -15,28 +15,17 @@ import config
 GOOD_MORNING_REGEXP = re.compile(r"[Дд]оброе +утро[\.!]*")
 GOOD_MORNING_TEXT = "Доброе утро"
 
-logging.basicConfig(
-    handlers=[
-        logging.StreamHandler(),
-    ],
-    level=os.getenv("LOGLEVEL", "INFO").upper(),
-    format="[%(asctime)s.%(msecs)03d] [%(name)s] [%(levelname)s]: %(message)s",
-    datefmt=r"%Y-%m-%dT%H-%M-%S",
-)
-
-random.seed()
-
-
-def get_threshold(chat_id: int, date: datetime.date) -> int:
-    # Insert your threshold selection logic here
-    return random.randint(1, 4)
-
 
 client: TelegramClient = TelegramClient(
     session="Goodmorning Userbot Session",
     api_id=config.api_id,
     api_hash=config.api_hash,
 )
+
+
+def get_threshold(chat_id: int, date: datetime.date) -> int:
+    # Insert your threshold selection logic here
+    return random.randint(1, 4)
 
 
 def is_good_morning(message: Message) -> bool:
@@ -83,5 +72,17 @@ async def good_morning_handler(event: events.NewMessage.Event):
             await client.send_read_acknowledge(chat_id)
 
 
-with client:
-    client.run_until_disconnected()
+if __name__ == "__main__":
+    logging.basicConfig(
+        handlers=[
+            logging.StreamHandler(),
+        ],
+        level=os.getenv("LOGLEVEL", "INFO").upper(),
+        format="[%(asctime)s.%(msecs)03d] [%(name)s] [%(levelname)s]: %(message)s",
+        datefmt=r"%Y-%m-%dT%H-%M-%S",
+    )
+
+    random.seed()
+
+    with client:
+        client.run_until_disconnected()

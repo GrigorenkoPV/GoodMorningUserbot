@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-from telethon import TelegramClient
+from userbot import client
 
-import config
-
-TelegramClient(
-    session="Goodmorning Userbot Session",
-    api_id=config.api_id,
-    api_hash=config.api_hash,
-).start()
+client.start()
