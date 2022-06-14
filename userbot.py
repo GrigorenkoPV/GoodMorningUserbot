@@ -63,13 +63,14 @@ async def good_morning_handler(event: events.NewMessage.Event):
     logging.info(f"This is good morning #{count}/{threshold}")
     if count == threshold:
         logging.info(f"Time for a {GOOD_MORNING_TEXT!r}!")
+        await client.send_read_acknowledge(chat_id, message)
         await asyncio.sleep(3)
         async with client.action(chat_id, "typing"):
             logging.info("Started typing...")
             await asyncio.sleep(3)
             result = await message.respond(GOOD_MORNING_TEXT)
             logging.info(f"{GOOD_MORNING_TEXT}! {result}")
-            await client.send_read_acknowledge(chat_id)
+            await client.send_read_acknowledge(chat_id, result)
 
 
 if __name__ == "__main__":
