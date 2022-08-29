@@ -29,4 +29,4 @@ After that a `GoodMorning.session` file will be created and
 it will store the login info, so you won't need to log in again. 
 4. Launch the userbot with `python -m userbot`.
 5. ?????
-6. That's it.
+6. That's it. You can also run it as a docker-compose service.

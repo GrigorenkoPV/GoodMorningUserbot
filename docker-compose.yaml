@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  userbot:
+    build: .
+    image: goodmorning-userbot
+    container_name: goodmorning-userbot
+    restart: always
