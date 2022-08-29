@@ -1,9 +1,2 @@
-telethon==1.24
-
-# Non-mandatory, just for allegedly faster encyrption.
-# Requires you to have a Rust compiler I think,
-# so you might just want to leave it commented out.
-# cryptg==0.3 
-
-# Also see
-# https://docs.telethon.dev/en/stable/basic/installation.html#optional-dependencies
+pyrogram~=2.0.27
+tgcrypto~=1.2.3
