@@ -12,7 +12,7 @@ from pyrogram import Client, enums, filters, handlers, types
 
 logger = logging.getLogger(__name__)
 
-GOOD_MORNING_REGEXP = re.compile(r"[Дд]оброе +утро[\.!]*")
+GOOD_MORNING_REGEXP = re.compile(r"[Дд]оброе +утро[\.!]*$", re.MULTILINE)
 GOOD_MORNING_TEXT = "Доброе утро"
 
 
