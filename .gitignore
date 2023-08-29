@@ -1,12 +1,18 @@
+# IDEs
 .idea/
 .vscode/
 
+# Python
 venv/
-env/
-
 __pycache__/
 
+# Pyrogram
 *.session
 *.session-journal
 
-config.py
+# Config
+config.toml
+
+# Nix
+/result*
+.pre-commit-config.yaml
