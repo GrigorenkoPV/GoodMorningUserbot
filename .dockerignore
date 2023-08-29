@@ -1,14 +1,3 @@
-*/.git*
-
-*/__pycache__/
-*/venv/
-
-*/README*
-*/LICENSE*
-
-*/*.dockerfile
-*/Dockerfile
-*/.dockerignore
-*/docker-compose.*
-
-*/*example*
+*
+!*.py
+!pyproject.toml

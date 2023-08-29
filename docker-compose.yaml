@@ -5,3 +5,6 @@ services:
     image: goodmorning-userbot
     container_name: goodmorning-userbot
     restart: always
+    volumes:
+      - ./config.toml:/etc/goodmorninguserbot.toml:ro
+    command: [ "--config", "/etc/goodmorninguserbot.toml" ]

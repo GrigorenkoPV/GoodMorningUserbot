@@ -106,7 +106,7 @@ def main():
     client = construct_client(
         api_id=os.getenv("API_ID", config.get("api_id")),
         api_hash=os.getenv("API_HASH", config.get("api_hash")),
-        workdir=args.pyrogram_dir,
+        workdir=os.getenv("PYROGRAM_WORKDIR", args.pyrogram_dir),
         chats=config["chats"],
     )
     random.seed()
