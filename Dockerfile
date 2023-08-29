@@ -12,11 +12,16 @@ RUN python -m build --wheel --no-isolation
 
 FROM base AS runner
 
-COPY --from=builder /tmp/build/dist/*.whl /tmp/
-RUN apk add --no-cache gcc musl-dev && \
-    pip install --no-cache-dir /tmp/*.whl && \
-    rm /tmp/*.whl && \
+# Pre-install tgcrypto before copying over the built package,
+# because tgcrypto has no aarch64 wheels for musl,
+# so you end up having to build it every time.
+RUN uname -m | grep 86 || \
+    apk add --no-cache gcc musl-dev && \
+    pip install --no-cache-dir tgcrypto && \
     apk del gcc musl-dev
+
+COPY --from=builder /tmp/build/dist/*.whl /tmp/
+RUN pip install --no-cache-dir /tmp/*.whl && rm /tmp/*.whl
 
 COPY *.session /var/pyrogram/
 VOLUME ["/var/pyrogram/"]
