@@ -15,10 +15,11 @@ FROM base AS runner
 # Pre-install tgcrypto before copying over the built package,
 # because tgcrypto has no aarch64 wheels for musl,
 # so you end up having to build it every time.
-RUN uname -m | grep 86 || \
+RUN if [ !  $( uname -m | grep 86) ]; then \
     apk add --no-cache gcc musl-dev && \
     pip install --no-cache-dir tgcrypto && \
-    apk del gcc musl-dev
+    apk del gcc musl-dev; \
+    fi
 
 COPY --from=builder /tmp/build/dist/*.whl /tmp/
 RUN pip install --no-cache-dir /tmp/*.whl && rm /tmp/*.whl
