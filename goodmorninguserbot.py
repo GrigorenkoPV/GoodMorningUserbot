@@ -90,7 +90,7 @@ def main():
     )
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--pyrogram-dir",
+        "--pyrogram-workdir",
         default=".",
         help="the directory where the session files are stored",
     )
